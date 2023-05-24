@@ -1,0 +1,16 @@
+node_modules
+package-lock.json
+target/
+.idea/
+.terraform/
+*.swp
+*.orig
+*.log
+*~
+\#*\#
+.\#*
+.DS_Store
+node_modules
+*.zip
+.terraform.lock.hcl
+yarn.lock
