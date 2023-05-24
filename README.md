@@ -16,4 +16,4 @@ DEMO: https://www.abadcer.com/worker1
 
 Wroker that simply modifies the request and returns to normal Cloudflare workflow to reach origin.
 
-DEMO: https://www.abadcer.com/worker2
+DEMO: [https://www.abadcer.com/httpbin/headers](https://www.abadcer.com/httpbin/headers?show_env=1)
