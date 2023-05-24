@@ -238,7 +238,7 @@ function I(id){return document.getElementById(id);}
         IP Address: <p id="ip"></p>
     </div>
 </div>
-<a href="https://github.com/anabadce/cloudflare-workers/worker-librespeed">Source code</a>
+<a href="https://github.com/anabadce/cloudflare-workers/tree/main/worker-librespeed">Source code</a>
 <a href="https://github.com/publicarray/cf-workers/tree/master/packages/speed">Original Source code</a>
 <a href="https://github.com/librespeed/speedtest">LibreSpeed Source Code</a>
 <script type="text/javascript">
