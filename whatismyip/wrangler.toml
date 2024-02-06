@@ -1,0 +1,4 @@
+name = "whatismyip"
+main = "src/index.js"
+compatibility_date = "2024-01-29"
+workers_dev = false
