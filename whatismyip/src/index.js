@@ -1,30 +1,42 @@
 
 async function handleRequest(request) {
-  const clientUA = request.headers.get('User-Agent');
-  const clientIP = request.headers.get('CF-Connecting-IP');
-  const clientASN = request.cf.asn;
-  const clientISP = request.cf.asOrganization;
-  const clientCO = request.cf.country;
-  const clientCI = request.cf.city;
-  const clientRE = request.cf.region;
-  const clientLAT = request.cf.latitude;
-  const clientLON = request.cf.longitude;
-  const clientPC = request.cf.postalCode;
-  const clientTZ = request.cf.timezone;
-	const clientColo = request.cf.colo;
+  const payload = {
+    IP : request.headers.get('CF-Connecting-IP'),
+    Colo : request.cf.colo,
+    ASN : request.cf.asn,
+    ISP : request.cf.asOrganization,
+    Country : request.cf.country,
+    City : request.cf.city,
+    Region : request.cf.region,
+    Latitude : request.cf.latitude,
+    Longitude : request.cf.longitude,
+    PostalCode : request.cf.postalCode,
+    TimeZone : request.cf.timezone,
+    UserAgent : request.headers.get('User-Agent'),
+  }
 
-  return new Response("Public IP: " + clientIP + "\n" + 
-  "ASN: " + clientASN + "\n" + 
-  "ISP: " + clientISP + "\n" + 
-  "Country: " + clientCO + "\n" + 
-  "City: " + clientCI + "\n" + 
-  "Region: " + clientRE + "\n" + 
-  "Latitude, Longitude: " + clientLAT + "," + clientLON + "\n" + 
-  "Postal Code: " + clientPC + "\n" + 
-  "Timezone: " + clientTZ + "\n" + 
-  "User Agent: " + clientUA + "\n" +
-	"Cloudflare Colo: " + clientColo + "\n"
-  );
+  if (request.url.includes('json')) {
+    return new Response(JSON.stringify(payload), { 
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      }
+    });
+  }
+  else {
+    return new Response(objToString(payload), { 
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+      }
+    });
+  }
+}
+
+function objToString (obj) {
+  let str = '';
+  for (const [p, val] of Object.entries(obj)) {
+      str += `${p}: ${val}\n`;
+  }
+  return str;
 }
 
 addEventListener('fetch', event => {
