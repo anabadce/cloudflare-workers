@@ -1,5 +1,11 @@
 # Cloudflare Workers examples
 
+## whatismyip
+
+Simple worker to help you find your public IP address.
+
+DEMO: https://ip.abadcer.com/
+
 ## worker-librespeed
 
 Speedtest website running in a Cloudflare worker.
