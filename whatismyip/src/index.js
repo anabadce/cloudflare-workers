@@ -13,21 +13,34 @@ async function handleRequest(request) {
     PostalCode : request.cf.postalCode,
     TimeZone : request.cf.timezone,
     UserAgent : request.headers.get('User-Agent'),
-  }
-
-  if (request.url.includes('json')) {
-    return new Response(JSON.stringify(payload), { 
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      }
-    });
-  }
-  else {
-    return new Response(objToString(payload), { 
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-      }
-    });
+  };
+  const url = new URL(request.url);
+  switch (url.pathname) {
+    case '/json':
+      return new Response(JSON.stringify(payload), { 
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        }
+      });
+    case '/ip':
+      return new Response(`${payload.IP}\n`, { 
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+        }
+      });
+    case '/':
+      return new Response(objToString(payload), { 
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+        }
+      });
+    default:
+      return new Response("Not found.", {
+        status: 404,
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+        }
+      });
   }
 }
 
